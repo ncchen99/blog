@@ -76,7 +76,7 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "disqusjs"
+provider = "giscus"
 
 [comments.disqusjs]
 shortname = "nian-nian-djia"
@@ -127,13 +127,13 @@ serverName = "cactus.chat"
 siteName = ""
 
 [comments.giscus]
-repo = ""
-repoID = ""
-category = ""
-categoryID = ""
-mapping = ""
-lightTheme = ""
-darkTheme = ""
+repo = "ncchen99/ncchen99.github.io"
+repoID = "R_kgDOKXNP2A"
+category = "Announcements"
+categoryID = "DIC_kwDOKXNP2M4C9UNL"
+mapping = "pathname"
+lightTheme = "light"
+darkTheme = "transparent_dark"
 reactionsEnabled = 1
 emitMetadata = 0
 
