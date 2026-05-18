@@ -2,59 +2,55 @@
 
 # 我ㄉ Hugo 部落格
 
-### 使用 Hugo theme Stack
+本部落格使用 [Hugo](https://gohugo.io/) 作為靜態網站產生器，並採用了 [Hugo theme Stack](https://github.com/CaiJimmy/hugo-theme-stack) 這個美觀的主題。特別感謝主題作者 [CaiJimmy](https://github.com/CaiJimmy) 提供如此出色的設計（Credit to CaiJimmy for the Hugo theme Stack）。
 
+## 如何更新主題
 
-This is a quick start template for [Hugo theme Stack](https://github.com/CaiJimmy/hugo-theme-stack). It uses [Hugo modules](https://gohugo.io/hugo-modules/) feature to load the theme.
-
-It comes with a basic theme structure and configuration. GitHub action has been set up to deploy the theme to a public GitHub page automatically. Also, there's a cron job to update the theme automatically everyday.
-
-## Get started
-
-1. Click *Use this template*, and create your repository on GitHub.
-![Step 1](https://user-images.githubusercontent.com/5889006/156916624-20b2a784-f3a9-4718-aa5f-ce2a436b241f.png)
-
-2. Once the repository is created, create a GitHub codespace asociated with it.
-![Create codespace](https://user-images.githubusercontent.com/5889006/156916672-43b7b6e9-4ffb-4704-b4ba-d5ca40ffcae7.png)
-
-3. And voila! You're ready to go. The codespace has been configured with the latest version of Hugo extended, just run `hugo server` in the terminal and see your new site in action.
-
-4. Check `config` folder for the configuration files. You can edit them to suit your needs. Make sure to update the `baseurl` property in `config/_default/config.toml` to your site's URL.
-
-5. Once you're done editing the site, just commit it and push it. GitHub action will deploy the site automatically to GitHub page asociated with the repository.
-![GitHub action](https://user-images.githubusercontent.com/5889006/156916881-90b8bb9b-1925-4e60-9d7a-8026cda729bf.png)
-
----
-
-In case you don't want to use GitHub codespace, you can also run this template in your local machine. **You need to install Git, Go and Hugo extended locally.**
-
-## Update theme manually
-
-Run:
+本專案使用 Hugo modules 來載入主題。若想要手動更新主題到 `v3` 的最新版本，請在終端機執行以下指令：
 
 ```bash
 hugo mod get -u github.com/CaiJimmy/hugo-theme-stack/v3
 hugo mod tidy
 ```
 
-> This starter template has been configured with `v3` version of theme. Due to the limitation of Go module, once the `v4` or up version of theme is released, you need to update the theme manually. (Modifying `config/module.toml` file)
+> **注意：** 目前專案設定使用 `v3` 版本的主題。由於 Go module 的限制，如果未來主題發布了 `v4` 或更新版本，你需要手動修改 `config/module.toml` 檔案來進行大版本升級。
 
-## Deploy to another static page hostings
+## 如何建立新文章
 
-If you want to build this site using another static page hosting, you need to make sure they have Go installed in the machine. 
+1. 在 `content/post/` 目錄下建立一個新的資料夾，並以文章標題命名（建議加上表情符號，如 `🗺️我的新文章`）。
+2. 在該資料夾內建立與資料夾同名的 Markdown 檔案（如 `🗺️我的新文章.md`）。
+3. 在 Markdown 檔案開頭加入 Front Matter 設定檔，範例如下：
 
-<details>
-  <summary>Vercel</summary>
-  
-You need to overwrite build command to install manually Go:
-
+```yaml
+---
+title: "🗺️我的新文章"
+description: 文章簡短描述...
+slug: my-new-post
+date: 2026-05-18 10:21:12
+tags: 
+    - 標籤1
+categories: 
+    - 分類1
+image: https://cdn.jsdelivr.net/gh/ncchen99/web-app-assets@main/blog/image/cover.jpg
+---
 ```
-amazon-linux-extras install golang1.11 && hugo --gc --minify
+
+## 如何上傳圖片至 CDN
+
+為了加快圖片載入速度，本專案將圖片統一存放於獨立的 GitHub 儲存庫 `web-app-assets`，並透過 jsDelivr 產生 CDN 連結。
+
+1. 準備好你要使用的圖片，建議將檔名更改為英文格式（例如 `my-image.jpg` 或 `my-image.svg`）。
+2. 將圖片檔案移動到本機的 `web-app-assets/blog/image/` 目錄中。
+3. 透過終端機進入 `web-app-assets` 專案目錄，將圖片提交（Commit）並推送（Push）到 GitHub：
+
+```bash
+cd ../web-app-assets # 根據你的實際路徑調整
+git add blog/image/你的圖片.jpg
+git commit -m "Add new images"
+git push
 ```
 
-![](https://user-images.githubusercontent.com/5889006/156917172-01e4d418-3469-4ffb-97e4-a905d28b8424.png)
-
-Make sure also to specify Hugo version in the environment variable `HUGO_VERSION` (Use the latest version of Hugo extended):
-
-![Environment variable](https://user-images.githubusercontent.com/5889006/156917212-afb7c70d-ab85-480f-8288-b15781a462c0.png)
-</details>
+4. 圖片推送到 GitHub 後，即可透過 jsDelivr 取得 CDN 網址，格式如下：
+   `https://cdn.jsdelivr.net/gh/ncchen99/web-app-assets@main/blog/image/你的圖片.jpg`
+5. 在文章的 Markdown 檔案中，使用以下語法插入圖片即可：
+   `![圖片說明](https://cdn.jsdelivr.net/gh/ncchen99/web-app-assets@main/blog/image/你的圖片.jpg)`
