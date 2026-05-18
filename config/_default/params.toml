@@ -136,6 +136,7 @@ lightTheme = "light"
 darkTheme = "transparent_dark"
 reactionsEnabled = 1
 emitMetadata = 0
+lang = "zh-TW"
 
 [comments.gitalk]
 owner = ""
